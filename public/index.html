@@ -11,18 +11,14 @@
         <h1>GPT Interface Comparison</h1>
         
         <!-- API Key Section -->
-        <div class="api-key-section">
-            <h2>Enter Your API Keys</h2>
-            <form id="apiKeyForm" class="form">
-                <label for="GOOGLE_GEMINI_API_KEY">Google Gemini API Key:</label>
-                <input type="text" id="GOOGLE_GEMINI_API_KEY" name="gemini" placeholder="Enter your Google Gemini API Key">
-                
-                <label for="OPENAI_API_KEY">OpenAI API Key:</label>
-                <input type="text" id="OPENAI_API_KEY" name="openai" placeholder="Enter your OpenAI API Key">
-                
+        <div class="container">
+            <form action="/submit-api-key" method="POST">
+                <label for="OPENAI_API_KEY">OPENAI_API_KEY Key:</label>
+                <input type="password" id="OPENAI_API_KEY" name="oapiKey" required><br>
+                <label for="GOOGLE_GEMINI_API_KEY">GOOGLE_GEMINI_API_KEY Key:</label>
+                <input type="password" id="GOOGLE_GEMINI_API_KEY" name="gapiKey" required><br>
                 <button type="submit">Submit</button>
             </form>
-            <p id="responseMessage"></p>
         </div>
         <!-- <script src="scripts.js"></script> -->
          <!-- <script>
