@@ -47,7 +47,10 @@ async function submitPrompt() {
         alert("Please enter a prompt.");
     }
 }
-
+function autoResize(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+}
 // Function to change the textarea color dynamically
 // Function to change the textarea color dynamically
 
