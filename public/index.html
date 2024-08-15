@@ -10,35 +10,39 @@
     <div class="container">
         <h1>GPT Interface Comparison</h1>
         
+        <body>
+            <iframe src="readme.html" width="40" height="90" style="display: block;">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
+            <button onclick="window.location.href='readme.html';">View README</button>
+        </body>
+        
         <!-- API Key Section -->
-        <div class="container">
+  <!-- API Key Section -->
+          <!-- API Key Section -->
+          
+          <div class="api-key-section">
             <form id="apiKeyForm" action="/submit-api-key" method="POST">
-                <label for="OPENAI_API_KEY">OPENAI_API_KEY Key:</label>
+                <br><br><h2>Enter your API Keys Here:</h2>
+                <br><label for="OPENAI_API_KEY">OPENAI_API_KEY Key:</label>
                 <input type="password" id="OPENAI_API_KEY" name="oapiKey" required><br>
                 <label for="GOOGLE_GEMINI_API_KEY">GOOGLE_GEMINI_API_KEY Key:</label>
                 <input type="password" id="GOOGLE_GEMINI_API_KEY" name="gapiKey" required><br>
-                <button type="submit" value="Submit" onclick="alert('Your API Keys are submitted to the Server!!')">Submit API Keys</button>
+                <!-- <button type="button" onclick="alert('API Keys Submitted, continue with STEP 1')">Submit</button> -->
+                <button type="submit" value="Submit" onclick="alert('Your API Keys are submitted to the Server!')">Submit API Keys</button>
             </form>
-        </div>
+          </div>
 
         
-        <!-- <script src="scripts.js"></script> -->
-         <!-- <script>
-            const formEl = document.querySelector('.form');
-
-            formEl.addEventListener('submit', event => {
-                event.preventDefault();
-
-                const formData = new FormData(formEl);
-                formData.get('OPENAI_API_KEY')
-            });
-
-         </script> -->
-
+    <!-- <script>
+        document.getElementById('apiKeyForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission behavior
+        });
+    </script> -->
         <!-- Prompt Section -->
         <div class="step">
             <h2>Step 1: Enter your Prompt</h2>
-            <textarea id="userPrompt" rows="4" placeholder="Enter your prompt here..." ></textarea>
+            <textarea id="userPrompt" rows="4" placeholder="Enter your prompt here..." oninput="autoResize(this)"></textarea>
             <button onclick="submitPrompt()">Submit</button>
         </div>
 
@@ -105,5 +109,6 @@
     </div>
 
     <script src="scripts.js"></script>
+    
 </body>
 </html>
