@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT Interface Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GPT Interface Comparison</h1>
+        
+        <!-- API Key Section -->
+        <div class="api-key-section">
+            <h2>Enter Your API Keys</h2>
+            <form id="apiKeyForm" class="form">
+                <label for="GOOGLE_GEMINI_API_KEY">Google Gemini API Key:</label>
+                <input type="text" id="GOOGLE_GEMINI_API_KEY" name="gemini" placeholder="Enter your Google Gemini API Key">
+                
+                <label for="OPENAI_API_KEY">OpenAI API Key:</label>
+                <input type="text" id="OPENAI_API_KEY" name="openai" placeholder="Enter your OpenAI API Key">
+                
+                <button type="submit">Submit</button>
+            </form>
+            <p id="responseMessage"></p>
+        </div>
+        <!-- <script src="scripts.js"></script> -->
+         <!-- <script>
+            const formEl = document.querySelector('.form');
+
+            formEl.addEventListener('submit', event => {
+                event.preventDefault();
+
+                const formData = new FormData(formEl);
+                formData.get('OPENAI_API_KEY')
+            });
+
+         </script> -->
+
+        <!-- Prompt Section -->
+        <div class="step">
+            <h2>Step 1: Enter your Prompt</h2>
+            <textarea id="userPrompt" rows="4" placeholder="Enter your prompt here..." oninput="autoResize(this)"></textarea>
+            <button onclick="submitPrompt()">Submit</button>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
+        </div>
+
+        <!-- Prompt Supply Section -->
+        <div class="step">
+            <h2>Step 2: Prompt Supply</h2>
+            <div class="step-results">
+                <textarea id="gpt1Prompt" readonly rows="10" placeholder="GPT-3 Prompt" oninput="autoResize(this)"></textarea>
+                <textarea id="gpt2Prompt" readonly  rows="10" placeholder="Gemini Prompt" oninput="autoResize(this)"></textarea>
+            </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
+        </div>
+
+        <!-- Results Section -->
+        <div class="step">
+            <h2>Step 3: Results</h2>
+            <div class="step-results">
+                <textarea id="gpt1Result" readonly rows="10" placeholder="GPT-3 Result" oninput="autoResize(this)"></textarea>
+                <textarea id="gpt2Result" readonly rows="10" placeholder="Gemini Result" oninput="autoResize(this)"></textarea>
+            </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="step">
+            <h2>Step 4: Comparison</h2>
+            <textarea id="comparisonResult" readonly rows="6" placeholder="Comparison Result" oninput="autoResize(this)"></textarea>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
+        </div>
+
+        <!-- Winner Section -->
+        <div class="step">
+            <h2>Step 5: Winner</h2>
+            <textarea id="winnerResult" readonly placeholder="Winner" oninput="autoResize(this)"></textarea>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
+        </div>
+
+        <!-- Optimized Result Section -->
+        <div class="step">
+            <h2>Step 6: Optimized Result</h2>
+            <textarea id="finalResult" rows="8" placeholder="Final Optimized Result" readonly ></textarea><br>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
