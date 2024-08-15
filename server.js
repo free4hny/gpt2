@@ -73,11 +73,7 @@ app.post('/api/generate', async (req, res) => {
         const gpt2Result = geminiResponse.data.candidates[0].content.parts[0].text;
 
         // Combine both results
-<<<<<<< HEAD
         const combinedContent = `Here is the content from ChatGPT: ${gpt1Result}\nHere is the content from Gemini: ${gpt2Result}`;
-=======
-        const combinedContent = `Here is the content from ChatGPT:${gpt1Result}\n and here is the content from Gemini: ${gpt2Result}`;
->>>>>>> 3d5442e5217063b0d5e8b714bb03d3003cb49a83
 
         // Determine the winner
         const winnerModel = gpt1Result.length > gpt2Result.length ? 'gpt-3.5-turbo' : 'gemini-pro';
@@ -90,11 +86,7 @@ app.post('/api/generate', async (req, res) => {
                 'https://api.openai.com/v1/chat/completions',
                 {
                     model: 'gpt-3.5-turbo',
-<<<<<<< HEAD
                     messages: [{ role: 'user', content: `Use the contents provided to get the best result:\n\n${combinedContent}` }],
-=======
-                    messages: [{ role: 'user', content: `Use the Contents provided to get the Best result :\n\n${combinedContent}` }],
->>>>>>> 3d5442e5217063b0d5e8b714bb03d3003cb49a83
                     max_tokens: 150,
                 },
                 {
