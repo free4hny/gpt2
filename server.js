@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 require('dotenv').config();
-
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -11,6 +11,41 @@ app.use(express.static('public'));
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// CSV Writer setup
+const csvWriter = createCsvWriter({
+    path: 'user_info.csv',
+    append: true,
+    header: [
+        {id: 'fname', title: 'FISRT NAME'},
+        {id: 'lname', title: 'LAST NAME'},
+        {id: 'company', title: 'COMPANY'},
+        {id: 'email', title: 'EMAIL'}
+    ]
+});
+app.get('/form', (req, res) => {
+    res.sendFile(__dirname + 'public/form.html');
+});
+
+app.post('/submit', (req, res) => {
+    const data = [{
+        fname: req.body.fname,
+        lname: req.body.lname,
+        company: req.body.company,
+        email: req.body.email
+    }];
+
+    csvWriter
+        .writeRecords(data)
+        .then(() => {
+            console.log('Data added to csv file');
+            res.redirect('/index.html');
+        })
+        .catch(err => {
+            console.error('Error writing to csv:', err);
+            res.status(500).send('Error writing data');
+        });
+});
 
 // Variables to store API keys
 let openaiApiKey = null;
