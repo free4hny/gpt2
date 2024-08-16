@@ -3,112 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPT Interface Comparison</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Submit Information</title>
+    <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
-    <div class="container">
-        <h1>GPT Interface Comparison</h1>
-        
-        <body>
-            <iframe src="readme.html" width="40" height="90" style="display: block;">
-                <p>Your browser does not support iframes.</p>
-            </iframe>
-            <button onclick="window.location.href='readme.html';">View README</button>
-        </body>
-        
-        <!-- API Key Section -->
-  <!-- API Key Section -->
-          <!-- API Key Section -->
-          
-          <div class="api-key-section">
-            <form id="apiKeyForm" action="/submit-api-key" method="POST">
-                <br><br><h2>Enter your API Keys Here:</h2>
-                <br><label for="OPENAI_API_KEY">OPENAI_API_KEY Key:</label>
-                <input type="password" id="OPENAI_API_KEY" name="oapiKey" required><br>
-                <label for="GOOGLE_GEMINI_API_KEY">GOOGLE_GEMINI_API_KEY Key:</label>
-                <input type="password" id="GOOGLE_GEMINI_API_KEY" name="gapiKey" required><br>
-                <!-- <button type="button" onclick="alert('API Keys Submitted, continue with STEP 1')">Submit</button> -->
-                <button type="submit" value="Submit" onclick="alert('Your API Keys are submitted to the Server!')">Submit API Keys</button>
-            </form>
-          </div>
-
-        
-    <!-- <script>
-        document.getElementById('apiKeyForm').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent the default form submission behavior
-        });
-    </script> -->
-        <!-- Prompt Section -->
-        <div class="step">
-            <h2>Step 1: Enter your Prompt</h2>
-            <textarea id="userPrompt" rows="4" placeholder="Enter your prompt here..." oninput="autoResize(this)"></textarea>
-            <button onclick="submitPrompt()">Submit</button>
-        </div>
-
-        <!-- Arrow -->
-        <div class="arrow">
-            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
-        </div>
-
-        <!-- Prompt Supply Section -->
-        <div class="step">
-            <h2>Step 2: Prompt Supply</h2>
-            <div class="step-results">
-                <textarea id="gpt1Prompt" readonly rows="10" placeholder="GPT-3 Prompt" oninput="autoResize(this)"></textarea>
-                <textarea id="gpt2Prompt" readonly  rows="10" placeholder="Gemini Prompt" oninput="autoResize(this)"></textarea>
+    <div class="form-container">
+        <form id="infoForm">
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname" required>
             </div>
-        </div>
 
-        <!-- Arrow -->
-        <div class="arrow">
-            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
-        </div>
-
-        <!-- Results Section -->
-        <div class="step">
-            <h2>Step 3: Results</h2>
-            <div class="step-results">
-                <textarea id="gpt1Result" readonly rows="10" placeholder="GPT-3 Result" oninput="autoResize(this)"></textarea>
-                <textarea id="gpt2Result" readonly rows="10" placeholder="Gemini Result" oninput="autoResize(this)"></textarea>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lname" required>
             </div>
-        </div>
 
-        <!-- Arrow -->
-        <div class="arrow">
-            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
-        </div>
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" id="company" name="company" required>
+            </div>
 
-        <!-- Comparison Section -->
-        <div class="step">
-            <h2>Step 4: Comparison</h2>
-            <textarea id="comparisonResult" readonly rows="6" placeholder="Comparison Result" oninput="autoResize(this)"></textarea>
-        </div>
-
-        <!-- Arrow -->
-        <div class="arrow">
-            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
-        </div>
-
-        <!-- Winner Section -->
-        <div class="step">
-            <h2>Step 5: Winner</h2>
-            <textarea id="winnerResult" readonly placeholder="Winner" oninput="autoResize(this)"></textarea>
-        </div>
-
-        <!-- Arrow -->
-        <div class="arrow">
-            <img src="https://media.istockphoto.com/id/1362875627/vector/red-arrow-down-icon-direction-cursor-sign-navigation-concept-realistic-design-vector.jpg?s=1024x1024&w=is&k=20&c=WeN3FJIHCYx4TixNUxW6TmHM9UB0NTvCfPDdremdmL8=" alt="Arrow">
-        </div>
-
-        <!-- Optimized Result Section -->
-        <div class="step">
-            <h2>Step 6: Optimized Result</h2>
-            <textarea id="finalResult" rows="8" placeholder="Final Optimized Result" readonly ></textarea><br>
-        </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <input type="submit" value="Submit" class="submit-button">
+        </form>
+        <div id="message"></div> <!-- Placeholder for the message -->
     </div>
 
-    <script src="scripts.js"></script>
-    
+    <script src="scripts2.js"></script>
 </body>
 </html>
