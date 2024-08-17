@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+// const nodemailer = require('nodemailer');
+
 require('dotenv').config();
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const app = express();
@@ -12,7 +14,9 @@ app.use(express.static('public'));
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// CSV Writer setup
+
+
+// // CSV Writer setup
 const csvWriter = createCsvWriter({
     path: 'user_info.csv',
     append: true,
@@ -23,29 +27,29 @@ const csvWriter = createCsvWriter({
         {id: 'email', title: 'EMAIL'}
     ]
 });
-app.get('/form', (req, res) => {
-    res.sendFile(__dirname + 'public/form.html');
-});
+// app.get('/form', (req, res) => {
+//     res.sendFile(__dirname + 'public/form.html');
+// });
 
-app.post('/submit', (req, res) => {
-    const data = [{
-        fname: req.body.fname,
-        lname: req.body.lname,
-        company: req.body.company,
-        email: req.body.email
-    }];
+// app.post('/submit', (req, res) => {
+//     const data = [{
+//         fname: req.body.fname,
+//         lname: req.body.lname,
+//         company: req.body.company,
+//         email: req.body.email
+//     }];
 
-    csvWriter
-        .writeRecords(data)
-        .then(() => {
-            console.log('Data added to csv file');
-            res.redirect('/index.html');
-        })
-        .catch(err => {
-            console.error('Error writing to csv:', err);
-            res.status(500).send('Error writing data');
-        });
-});
+//     csvWriter
+//         .writeRecords(data)
+//         .then(() => {
+//             console.log('Data added to csv file');
+//             res.redirect('/index.html');
+//         })
+//         .catch(err => {
+//             console.error('Error writing to csv:', err);
+//             res.status(500).send('Error writing data');
+//         });
+// });
 
 // Variables to store API keys
 let openaiApiKey = null;
@@ -165,6 +169,63 @@ app.post('/api/generate', async (req, res) => {
     }
 });
 
+// app.listen(port, () => {
+//     console.log(`Server running on port ${port}`);
+// });
+
+const nodemailer = require('nodemailer');
+// require('dotenv').config();
+
+// Configure Nodemailer with Fastmail
+const transporter = nodemailer.createTransport({
+    host: 'smtp.fastmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.FASTMAIL_USER,
+        pass: process.env.FASTMAIL_PASSWORD
+    }
+});
+
+app.post('/submit', (req, res) => {
+    const data = [{
+        fname: req.body.fname,
+        lname: req.body.lname,
+        company: req.body.company,
+        email: req.body.email
+    }];
+
+    csvWriter
+        .writeRecords(data)
+        .then(async () => {
+            console.log('Data added to csv file');
+
+            // Send confirmation email
+            const mailOptions = {
+                from: process.env.FASTMAIL_USER, // sender address
+                to: `${req.body.email}, gpt2024@fastmail.com`, // list of receivers
+                subject: 'Thank you for your time! ', // Subject line
+                text: `Hello ${req.body.fname},\n\n I just wanted to take a moment to express my heartfelt thanks to you for trying out my GPT app. \nYour support and feedback are invaluable to me, and I'm thrilled to have you as part of this journey. \nYour involvement is not just appreciated; it's essential in helping me improve and evolve. Please write me back with your feedback on "gpt2024@fastmail.com"\nThank you once again for your time and insights!
+                \n I have recieved the following information:\n Name: ${req.body.fname } ${req.body.lname}\nEmail: ${req.body.email}\nCompany: ${req.body.company}
+
+Warm regards,
+Abhishek Bhardwaj.`, // plain text body
+            };
+
+            try {
+                await transporter.sendMail(mailOptions);
+                console.log('Confirmation email sent');
+                res.redirect('/index.html');
+            } catch (error) {
+                console.error('Failed to send confirmation email:', error);
+                res.status(500).send('Error sending email');
+            }
+        })
+        .catch(err => {
+            console.error('Error writing to csv:', err);
+            res.status(500).send('Error writing data');
+        });
+});
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
